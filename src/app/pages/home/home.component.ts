@@ -7,18 +7,14 @@ import { TodolistItemsServiceService } from 'src/app/services/todolist-items-ser
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit{
-  actualTodoList = this.todolistItemsServiceService.actualList;
+  actualTodoList: TodoItem[] = [];
   todoList: TodoItem[] = [];
   currentRoute: string = '';
   sub!: any;
-  todoLength: number=0;
 
   constructor (private todolistItemsServiceService: TodolistItemsServiceService) { }
 
   ngOnInit() {
-    this.todolistItemsServiceService.todoListFromStorage$.subscribe(todos => {
-      this.todoLength = todos.length
-      this.todoList = todos
-    })
+    this.todolistItemsServiceService.todoListFromStorage$.subscribe(v=>this.actualTodoList=v);
   }
 }
