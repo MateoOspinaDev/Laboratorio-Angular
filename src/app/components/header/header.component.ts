@@ -12,8 +12,6 @@ export class HeaderComponent implements OnInit{
 
   @ViewChild('todoInput') todoInput!: ElementRef;
 
-  // input todo field
-  //todoItemField = new FormControl('');
   myForm = new FormGroup({
     inputField: new FormControl('')
   });
@@ -29,26 +27,15 @@ export class HeaderComponent implements OnInit{
   }, 0);
   }
 
-  // addTodo(){
-  //   if(this.todoItemField.value == "" || this.todoItemField.value == null){
-  //     return;
-  //   }else{
-  //     let todoItem:TodoItem = {
-  //       description: this.todoItemField.value
-  //     }
-  //     this.todolistItemsServiceService.saveItem(todoItem);
-  //   }
-  // }
-
   onSubmit(){
-    let inputField = this.myForm.get('inputField')?.value?.trim();
-    if(inputField == "" || inputField == null){
+    let inputField = this.myForm.get('inputField');
+    if(inputField?.value == "" || inputField?.value == null){
       return;
     }else{
       let todoItem:TodoItem = {
-        description: inputField
+        description: inputField.value.trim()
       }
-      //this.myForm.get('inputField')?.setValue('')
+      inputField.setValue('')
       this.todolistItemsServiceService.saveItem(todoItem);
     }
   }
