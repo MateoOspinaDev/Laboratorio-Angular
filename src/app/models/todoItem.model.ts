@@ -1,3 +1,3 @@
-export interface todoItem {
+export interface TodoItem {
   description: string;
 }
