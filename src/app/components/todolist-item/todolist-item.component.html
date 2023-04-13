@@ -1,8 +1,8 @@
 <li [ngClass]="{'completed': todoItem.isDone, 'editing': editing}">
   <div class="view">
-    <input class="toggle" type="checkbox"  />
+  <input class="toggle" type="checkbox" (click)="onCheckboxChange()" [checked]="todoItem.isDone"/>
     <label (dblclick)="activeEditTodoItem()">{{todoItem.description}}</label>
     <button class="destroy" (click)="deleteTodoItem()"></button>
   </div>
-  <input #editTodoInput [formControl]="inputEditField" class="edit" formControlName="inputEditField" (keyup.enter)="onEdit()"/>
+  <input #editTodoInput [formControl]="inputEditField" class="edit" [formControl]="inputEditField" (keyup.enter)="onEdit()" (keydown.escape)="exitUpdateTodoItem()"/>
 </li>

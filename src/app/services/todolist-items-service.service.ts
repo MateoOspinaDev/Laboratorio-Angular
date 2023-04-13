@@ -38,19 +38,10 @@ export class TodolistItemsServiceService {
     }
   }
 
-  editItemtitle(id:string, newTitle:string){
+  editItem(id:string, todoItem: TodoItem){
     if(id){
       const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
-      this.actualList[index].description = newTitle;
-      this.todoListFromStorage.next(this.actualList);
-      this.saveActualListInLocalStorage(this.actualList);
-    }
-  }
-
-  editItemStatus(id:string, newStatus:boolean){
-    if(id){
-      const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
-      this.actualList[index].isDone = newStatus;
+      this.actualList[index] = todoItem;
       this.todoListFromStorage.next(this.actualList);
       this.saveActualListInLocalStorage(this.actualList);
     }

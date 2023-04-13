@@ -35,8 +35,20 @@ export class TodolistItemComponent {
     }else{
       let todoItemTitle:string = inputField.value.trim()
       inputField.setValue('')
-      this.todolistItemsServiceService.editItemtitle(this.todoItem.id,todoItemTitle);
+      this.todoItem.description = todoItemTitle;
+      this.todolistItemsServiceService.editItem(this.todoItem.id,this.todoItem);
       this.editing = false;
     }
+  }
+
+  exitUpdateTodoItem(){
+    let inputField = this.inputEditField;
+    inputField.setValue('')
+    this.editing = false;
+  }
+
+  onCheckboxChange(){
+    this.todoItem.isDone = !this.todoItem.isDone;
+    this.todolistItemsServiceService.editItem(this.todoItem.id,this.todoItem);
   }
 }
