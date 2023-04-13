@@ -17,11 +17,12 @@ export class TodolistItemsServiceService {
     if (localStorageList && localStorageList.length > 0) {
       this.todoListFromStorage.next(JSON.parse(localStorageList));
     }
-    this.todoListFromStorage$.subscribe(v=>this.actualList=v);
+    this.todoListFromStorage$.subscribe(items=>this.actualList=items);
    }
 
-  saveItem(todoItem: TodoItem) {
-    if(todoItem){
+  saveItem(todoItemTitle: string) {
+    if(todoItemTitle){
+      let todoItem: TodoItem = {id:this.actualList.length+"",description: todoItemTitle,isDone:false};
       this.actualList.push(todoItem);
       this.todoListFromStorage.next(this.actualList);
       this.saveActualListInLocalStorage(this.actualList);

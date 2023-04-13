@@ -8,7 +8,7 @@ import { TodoItem } from 'src/app/models/todoItem.model';
 })
 export class TodolistItemComponent {
 
-  @Input() todoItem: TodoItem = {description: ''};
+  @Input() todoItem: TodoItem = {id:"",description: '',isDone:true};
 
   constructor() { }
 

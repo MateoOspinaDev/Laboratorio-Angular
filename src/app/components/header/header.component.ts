@@ -32,11 +32,9 @@ export class HeaderComponent implements OnInit{
     if(inputField?.value == "" || inputField?.value == null){
       return;
     }else{
-      let todoItem:TodoItem = {
-        description: inputField.value.trim()
-      }
+      let todoItemTitle:string = inputField.value.trim()
       inputField.setValue('')
-      this.todolistItemsServiceService.saveItem(todoItem);
+      this.todolistItemsServiceService.saveItem(todoItemTitle);
     }
   }
 
