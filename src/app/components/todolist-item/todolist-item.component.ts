@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { TodoItem } from 'src/app/models/todoItem.model';
+import { TodolistItemsServiceService } from 'src/app/services/todolist-items-service.service';
 
 @Component({
   selector: 'app-todolist-item',
@@ -9,16 +10,12 @@ import { TodoItem } from 'src/app/models/todoItem.model';
 export class TodolistItemComponent {
 
   @Input() todoItem: TodoItem = {id:"",description: '',isDone:true};
-  isLabelHovered: boolean = false;
 
-  constructor() { }
+  constructor(private todolistItemsServiceService: TodolistItemsServiceService) { }
 
-  onMouseOver(){
-    this.isLabelHovered = true;
+  deleteTodoItem(){
+    this.todolistItemsServiceService.deleteItem(this.todoItem.id)
   }
 
-  onMouseOut(){
-    this.isLabelHovered = false;
-  }
 
 }

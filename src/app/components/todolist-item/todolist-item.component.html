@@ -1,8 +1,8 @@
 <li class="completed">
   <div class="view">
     <input class="toggle" type="checkbox" />
-    <label (mouseout)="onMouseOut()" (mouseover)="onMouseOver()">{{todoItem.description}}</label>
-    <button *ngIf="isLabelHovered" class="destroy"></button>
+    <label>{{todoItem.description}}</label>
+    <button class="destroy" (click)="deleteTodoItem()"></button>
   </div>
   <input class="edit" value="Learn JavaScript" />
 </li>

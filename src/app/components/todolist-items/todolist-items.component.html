@@ -1,7 +1,5 @@
 <section class="main" *ngIf="items.length>0">
   <ul class="todo-list">
-    <li class="completed">
-      <app-todolist-item *ngFor="let item of items" [todoItem]="item"></app-todolist-item>
-    </li>
+    <app-todolist-item *ngFor="let item of items" [todoItem]="item"></app-todolist-item>
   </ul>
 </section>

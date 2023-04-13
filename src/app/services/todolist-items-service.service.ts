@@ -29,6 +29,15 @@ export class TodolistItemsServiceService {
     }
   }
 
+  deleteItem(id:string){
+    if(id){
+      const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
+      this.actualList.splice(index, 1);
+      this.todoListFromStorage.next(this.actualList);
+      this.saveActualListInLocalStorage(this.actualList);
+    }
+  }
+
   private getlocal = localStorage.getItem(LocalStorageKeys.MyDayKey);
 
   private saveActualListInLocalStorage(actualList:TodoItem[]){
