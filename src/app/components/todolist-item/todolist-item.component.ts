@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { TodoItem } from 'src/app/models/todoItem.model';
 
 @Component({
@@ -9,7 +9,16 @@ import { TodoItem } from 'src/app/models/todoItem.model';
 export class TodolistItemComponent {
 
   @Input() todoItem: TodoItem = {id:"",description: '',isDone:true};
+  isLabelHovered: boolean = false;
 
   constructor() { }
+
+  onMouseOver(){
+    this.isLabelHovered = true;
+  }
+
+  onMouseOut(){
+    this.isLabelHovered = false;
+  }
 
 }

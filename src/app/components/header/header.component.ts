@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TodolistItemsServiceService } from 'src/app/services/todolist-items-service.service';
-import { TodoItem } from 'src/app/models/todoItem.model';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -37,5 +36,4 @@ export class HeaderComponent implements OnInit{
       this.todolistItemsServiceService.saveItem(todoItemTitle);
     }
   }
-
 }
