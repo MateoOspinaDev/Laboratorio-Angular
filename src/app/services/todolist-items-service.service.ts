@@ -38,6 +38,24 @@ export class TodolistItemsServiceService {
     }
   }
 
+  editItemtitle(id:string, newTitle:string){
+    if(id){
+      const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
+      this.actualList[index].description = newTitle;
+      this.todoListFromStorage.next(this.actualList);
+      this.saveActualListInLocalStorage(this.actualList);
+    }
+  }
+
+  editItemStatus(id:string, newStatus:boolean){
+    if(id){
+      const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
+      this.actualList[index].isDone = newStatus;
+      this.todoListFromStorage.next(this.actualList);
+      this.saveActualListInLocalStorage(this.actualList);
+    }
+  }
+
   private getlocal = localStorage.getItem(LocalStorageKeys.MyDayKey);
 
   private saveActualListInLocalStorage(actualList:TodoItem[]){

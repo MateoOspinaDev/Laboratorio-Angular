@@ -1,8 +1,8 @@
-<li class="completed">
+<li [ngClass]="{'completed': todoItem.isDone, 'editing': editing}">
   <div class="view">
-    <input class="toggle" type="checkbox" />
-    <label>{{todoItem.description}}</label>
+    <input class="toggle" type="checkbox"  />
+    <label (dblclick)="activeEditTodoItem()">{{todoItem.description}}</label>
     <button class="destroy" (click)="deleteTodoItem()"></button>
   </div>
-  <input class="edit" value="Learn JavaScript" />
+  <input #editTodoInput [formControl]="inputEditField" class="edit" formControlName="inputEditField" (keyup.enter)="onEdit()"/>
 </li>
