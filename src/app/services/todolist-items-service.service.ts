@@ -47,6 +47,12 @@ export class TodolistItemsServiceService {
     }
   }
 
+  clearCompleted(){
+    this.actualList = this.actualList.filter((item: { isDone: boolean; }) => !item.isDone);
+    this.todoListFromStorage.next(this.actualList);
+    this.saveActualListInLocalStorage(this.actualList);
+  }
+
   private getlocal = localStorage.getItem(LocalStorageKeys.MyDayKey);
 
   private saveActualListInLocalStorage(actualList:TodoItem[]){

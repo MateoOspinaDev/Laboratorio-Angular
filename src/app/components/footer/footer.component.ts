@@ -17,9 +17,13 @@ export class FooterComponent implements OnInit{
       this.todoItemsCounter = v.length;
       this.todoItemsCounterDescription =
         this.todoItemsCounter == 1
-          ? '1 item left'
-          : `${this.todoItemsCounter} items left`;
+          ? ` item left`
+          : ` items left`;
     });
+  }
+
+  clearCompleted(){
+    this.todolistItemsServiceService.clearCompleted();
   }
 
 
