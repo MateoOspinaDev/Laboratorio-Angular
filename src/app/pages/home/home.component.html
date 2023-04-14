@@ -1,9 +1,7 @@
 <section class="todoapp">
   <app-header></app-header>
   <div class="container todoapp-wrapper">
-    <!-- This section should be hidden by default and shown when there are todos -->
-    <app-todolist-items [items]="actualTodoList"></app-todolist-items>
-    <!-- This footer should be hidden by default and shown when there are todos -->
-    <app-footer *ngIf="actualTodoList.length>0"></app-footer>
+    <app-todolist-items [items]="actualTodoList" *ngIf="todoList.length"></app-todolist-items>
+    <app-footer *ngIf="todoList.length"></app-footer>
   </div>
 </section>

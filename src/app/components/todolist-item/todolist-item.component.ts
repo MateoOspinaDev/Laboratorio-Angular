@@ -23,6 +23,8 @@ export class TodolistItemComponent {
 
   activeEditTodoItem(){
     this.editing = true;
+    let inputField = this.inputEditField;
+    inputField.setValue(this.todoItem.description);
     setTimeout(() => {
       this.editTodoInput.nativeElement.focus();
     }, 0);

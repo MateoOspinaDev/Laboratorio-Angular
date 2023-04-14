@@ -4,5 +4,5 @@
     <label (dblclick)="activeEditTodoItem()">{{todoItem.description}}</label>
     <button class="destroy" (click)="deleteTodoItem()"></button>
   </div>
-  <input #editTodoInput [formControl]="inputEditField" class="edit" [formControl]="inputEditField" (keyup.enter)="onEdit()" (keydown.escape)="exitUpdateTodoItem()"/>
+  <input #editTodoInput  [formControl]="inputEditField" class="edit" (keyup.enter)="onEdit()" (keydown.escape)="exitUpdateTodoItem()"/>
 </li>

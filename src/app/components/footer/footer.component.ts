@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TodolistItemsServiceService } from 'src/app/services/todolist-items-service.service';
 
 @Component({
@@ -8,15 +9,18 @@ import { TodolistItemsServiceService } from 'src/app/services/todolist-items-ser
 })
 export class FooterComponent implements OnInit{
 
-  todoItemsCounter: number = 0;
+  todoItemsCounterIsntDone: number = 0;
+  todoItemsCounterIsDone: number = 0;
   todoItemsCounterDescription: string = '';
 
-  constructor(private todolistItemsServiceService:TodolistItemsServiceService) { }
+  constructor(
+    private todolistItemsServiceService:TodolistItemsServiceService
+    ) { }
   ngOnInit(): void {
     this.todolistItemsServiceService.todoListFromStorage$.subscribe((v) => {
-      this.todoItemsCounter = v.length;
-      this.todoItemsCounterDescription =
-        this.todoItemsCounter == 1
+      this.todoItemsCounterIsntDone = v.filter((item) => !item.isDone).length;
+      this.todoItemsCounterIsDone = v.filter((item) => item.isDone).length;
+      this.todoItemsCounterDescription = this.todoItemsCounterIsntDone == 1
           ? ` item left`
           : ` items left`;
     });

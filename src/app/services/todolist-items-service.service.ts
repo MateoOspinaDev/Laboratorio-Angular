@@ -8,14 +8,14 @@ import { LocalStorageKeys } from '../models/LocalStorageKeys.enum';
 })
 export class TodolistItemsServiceService {
 
-  private todoListFromStorage = new BehaviorSubject<TodoItem[]>([]);
+  private _todoListFromStorage$ = new BehaviorSubject<TodoItem[]>([]);
   actualList!:TodoItem[];
-  todoListFromStorage$ = this.todoListFromStorage.asObservable();
+  todoListFromStorage$ = this._todoListFromStorage$.asObservable();
 
   constructor() {
     const localStorageList = this.getlocal;
     if (localStorageList && localStorageList.length > 0) {
-      this.todoListFromStorage.next(JSON.parse(localStorageList));
+      this._todoListFromStorage$.next(JSON.parse(localStorageList));
     }
     this.todoListFromStorage$.subscribe(items=>this.actualList=items);
    }
@@ -24,7 +24,7 @@ export class TodolistItemsServiceService {
     if(todoItemTitle){
       let todoItem: TodoItem = {id:this.actualList.length+"",description: todoItemTitle,isDone:false};
       this.actualList.push(todoItem);
-      this.todoListFromStorage.next(this.actualList);
+      this._todoListFromStorage$.next(this.actualList);
       this.saveActualListInLocalStorage(this.actualList);
     }
   }
@@ -33,7 +33,7 @@ export class TodolistItemsServiceService {
     if(id){
       const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
       this.actualList.splice(index, 1);
-      this.todoListFromStorage.next(this.actualList);
+      this._todoListFromStorage$.next(this.actualList);
       this.saveActualListInLocalStorage(this.actualList);
     }
   }
@@ -42,15 +42,29 @@ export class TodolistItemsServiceService {
     if(id){
       const index = this.actualList.findIndex((obj: { id: string; }) => obj.id === id);
       this.actualList[index] = todoItem;
-      this.todoListFromStorage.next(this.actualList);
+      this._todoListFromStorage$.next(this.actualList);
       this.saveActualListInLocalStorage(this.actualList);
     }
   }
 
   clearCompleted(){
     this.actualList = this.actualList.filter((item: { isDone: boolean; }) => !item.isDone);
-    this.todoListFromStorage.next(this.actualList);
+    this._todoListFromStorage$.next(this.actualList);
     this.saveActualListInLocalStorage(this.actualList);
+  }
+
+  filterByStatus(todoList:TodoItem[],status:string):TodoItem[]{
+    let list:TodoItem[]=[];
+    if(status == "pending"){
+      list= this.actualList.filter((item) => !item.isDone);
+    }
+    if(status == "completed"){
+      list= this.actualList.filter((item) => item.isDone);
+    }
+    if(status == "all"){
+      list= this.actualList;
+    }
+    return list;
   }
 
   private getlocal = localStorage.getItem(LocalStorageKeys.MyDayKey);
